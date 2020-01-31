@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class GestaoCidadesApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(GestaoCidadesApplication.class, args);
+		SpringApplication.run(GestaoCidadesApplication.class, args);		
 	}
 
 }
