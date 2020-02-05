@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table(name="cidade")
 public class Cidade implements Serializable {
@@ -13,7 +14,7 @@ public class Cidade implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private int id;
-	private int ibge_id;
+	private int codigoIbge;
 	private String uf;
 	private String nome;
 	private boolean capital;
@@ -21,29 +22,15 @@ public class Cidade implements Serializable {
 	private BigDecimal latitude;
 	private String nomeSemAcento;
 	private String nomeAlternativo;
-	private String microregiao;
-	private String mesoregiao;
+	private String microRegiao;
+	private String mesoRegiao;
 	private Date dataCriacao;
 	private Date dataAlteracao;
 	
 	public Cidade() {}
 	
-	
-	@PreUpdate
-	public void preUpdate() {
-		dataAlteracao = new Date();
-	}
-	
-	@PrePersist
-	public void prePersist() {
-		Date hojeHora = new Date();
-		dataCriacao = hojeHora;
-		dataAlteracao = hojeHora;
-	}	
-	
-
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getId() {
 		return id;
 	}
@@ -52,11 +39,11 @@ public class Cidade implements Serializable {
 	}
 	
 	@Column(name="ibge_id", nullable=false)
-	public int getIbge_id() {
-		return ibge_id;
+	public int getcodigoIbge() {
+		return codigoIbge;
 	}
-	public void setIbge_id(int ibge_id) {
-		this.ibge_id = ibge_id;
+	public void setcodigoIbge(int codigoIbge) {
+		this.codigoIbge = codigoIbge;
 	}
 	
 	@Column(name="uf", nullable=false)
@@ -117,39 +104,57 @@ public class Cidade implements Serializable {
 	
 	@Column(name="microregion", nullable=true)
 	public String getMicroregiao() {
-		return microregiao;
+		return microRegiao;
 	}
-	public void setMicroregiao(String microregiao) {
-		this.microregiao = microregiao;
+	public void setMicroregiao(String microRegiao) {
+		this.microRegiao = microRegiao;
 	}
 		
+	
 	@Column(name="mesoregion", nullable=true)
 	public String getMesoregiao() {
-		return mesoregiao;
+		return mesoRegiao;
 	}
-	public void setMesoregiao(String mesoregiao) {
-		this.mesoregiao = mesoregiao;
+	public void setMesoregiao(String mesoRegiao) {
+		this.mesoRegiao = mesoRegiao;
 	}
-		
-	@Column(name="dataCriacao", nullable=false)
+	
+	
+	@Column(name="data_criacao", nullable=false)
 	public Date getDataCriacao() {
 		return dataCriacao;
 	}	
 	public void setDataCriacao(Date dataCriacao) {
 		this.dataCriacao = dataCriacao;
-	}
+	}	
 
-	@Column(name="dataAlteracao", nullable=false)
+	@Column(name="data_alteracao", nullable=false)
 	public Date getDataAlteracao() {
 		return dataAlteracao;
 	}
 	public void setDataAlteracao(Date dataAlteracao) {
 		this.dataAlteracao = dataAlteracao;
 	}
+	
+	@PreUpdate
+	public void preUpdate() {
+		dataAlteracao = new Date();
+	}
+	@PrePersist
+	public void prePersist() {
+		Date hojeHora = new Date();
+		dataCriacao = hojeHora;
+		dataAlteracao = hojeHora;
+	}
 
 	@Override
 	public String toString() {
-		return "[Cidade: " +id+", "+ibge_id+", "+uf+", "+nome+", "+capital+", "+", "+longitude+", "+latitude+", "+nomeSemAcento+", "+nomeAlternativo+", "+microregiao+","+mesoregiao+ "]";
-	}
+		return "Cidade [id=" + id + ", codigoIbge=" + codigoIbge + ", uf=" + uf + ", nome=" + nome + ", capital="
+				+ capital + ", longitude=" + longitude + ", latitude=" + latitude + ", nomeSemAcento=" + nomeSemAcento
+				+ ", nomeAlternativo=" + nomeAlternativo + ", microregiao=" + microRegiao + ", mesoregiao=" + mesoRegiao
+				+ ", dataCriacao=" + dataCriacao + ", dataAlteracao=" + dataAlteracao + "]";
+	}	
+	
+	
 
 }
