@@ -22,6 +22,6 @@ public interface CidadeRepository extends JpaRepository<Cidade, Integer> {
 	
 	List<Cidade> findAllByUf(String uf);
 	
-	List<Cidade> findAllByCapitalIsTrueOrderByNome();
+	List<Cidade> findAllByCapitalIsTrueOrderByNome();	
 	
 }

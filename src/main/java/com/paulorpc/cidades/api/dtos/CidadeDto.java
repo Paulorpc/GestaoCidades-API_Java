@@ -30,7 +30,8 @@ public class CidadeDto {
 	}
 	
 	
-	@NotNull	
+	@NotEmpty(message="Campo 'codigoIbge' não pode ser vazio.")
+	@NotNull(message="Campo 'codigoIbge' não pode ser nulo.")	
 	//@Range(min=, max=)
 	public int getCodigoIbge() {
 		return codigoIbge;
@@ -39,8 +40,9 @@ public class CidadeDto {
 		this.codigoIbge = codigoIbge;
 	}
 	
-	@NotNull()
-	@Length(min = 2, max = 2, message = "Campo deve conter 2 caracteres")
+	@NotEmpty(message="Campo 'uf' não pode ser vazio.")
+	@NotNull(message="Campo 'uf' não pode ser nulo.")
+	@Length(min=2, max=2, message="Campo 'uf' deve conter entre {min} e {max} caracteres")
 	public String getUf() {
 		return uf;
 	}
@@ -48,8 +50,9 @@ public class CidadeDto {
 		this.uf = uf;
 	}
 	
-	@NotEmpty()
-	@Length(max = 50, message = "Campo deve conter no máximo 50 caracteres")
+	@NotEmpty(message="Campo 'nome' não pode ser vazio.")
+	@NotNull(message="Campo 'nome' não pode ser nulo.")
+	@Length(max=50, message="Campo 'nome' deve conter no máximo {max} caracteres")
 	public String getNome() {
 		return nome;
 	}
@@ -57,7 +60,8 @@ public class CidadeDto {
 		this.nome = nome;
 	}
 	
-	@NotNull()
+	@NotEmpty(message="Campo 'capital' deve ser 'true' ou 'false'.")
+	@NotNull(message="Campo 'capital' deve ser 'true' ou 'false'.")
 	public boolean isCapital() {
 		return capital;
 	}
@@ -66,7 +70,7 @@ public class CidadeDto {
 	}
 	
 	
-	public Optional<@Digits(integer = 10, fraction = 8, message="valor numérico fora dos limites. Esperado: Decimal 11,8.") BigDecimal> getLongitude() {
+	public Optional<@Digits(integer = 10, fraction = 8, message="Valor numérico '${validatedValue}' fora dos limites. Esperado: Decimal {integer},{fraction}.") BigDecimal> getLongitude() {
 		return longitude;
 	}
 	public void setLongitude(Optional<BigDecimal> longitude) {
@@ -74,7 +78,7 @@ public class CidadeDto {
 	}
 		
 	
-	public Optional<@Digits(integer = 10, fraction = 8, message="valor numérico fora dos limites. Esperado: Decimal 10,8.") BigDecimal> getLatitude() {
+	public Optional<@Digits(integer = 10, fraction = 8, message="valor numérico '${validatedValue}' fora dos limites. Esperado: Decimal {integer},{fraction}.") BigDecimal> getLatitude() {
 		return latitude;
 	}
 	public void setLatitude(Optional<BigDecimal> latitude) {
@@ -82,7 +86,7 @@ public class CidadeDto {
 	}
 	
 	//@Pattern(regex=, flags=)  	
-	public Optional<@Length(max = 50, message = "Campo de deve conter no máximo 50 caracteres") String> getNomeSemAcento() {
+	public Optional<@Length(max = 50, message = "Campo 'nomeSemAcento' de deve conter no máximo {max} caracteres") String> getNomeSemAcento() {
 		return nomeSemAcento;
 	}
 	public void setNomeSemAcento(Optional<String> nomeSemAcento) {
@@ -90,7 +94,7 @@ public class CidadeDto {
 	}
 	
 	
-	public Optional<@Length(max = 50, message = "Campo de deve conter no máximo 50 caracteres") String> getNomeAlternativo() {
+	public Optional<@Length(max = 50, message = "Campo 'nomeAlternadivo' deve conter no máximo {max} caracteres") String> getNomeAlternativo() {
 		return nomeAlternativo;
 	}
 	public void setNomeAlternativo(Optional<String> nomeAlternativo) {
@@ -98,7 +102,7 @@ public class CidadeDto {
 	}
 	
 	
-	public Optional<@Length(max = 50, message = "Campo de deve conter no máximo 50 caracteres") String> getMicroregiao() {
+	public Optional<@Length(max = 50, message = "Campo 'microRegiao' deve conter no máximo {max} caracteres") String> getMicroregiao() {
 		return microRegiao;
 	}	
 	public void setMicroregiao(Optional<String> microRegiao) {
@@ -106,7 +110,7 @@ public class CidadeDto {
 	}	
 
 	
-	public Optional<@Length(max = 50, message = "Campo de deve conter no máximo 50 caracteres") String> getMesoregiao() {
+	public Optional<@Length(max = 50, message = "Campo 'mesoRegiao' deve conter no máximo {max} caracteres") String> getMesoregiao() {
 		return mesoRegiao;
 	}
 	public void setMesoregiao(Optional<String> mesoRegiao) {

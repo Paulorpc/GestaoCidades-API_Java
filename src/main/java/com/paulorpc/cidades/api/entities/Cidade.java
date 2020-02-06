@@ -13,24 +13,50 @@ public class Cidade implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	
+	@Column(name="ibge_id", unique=true,nullable=false)
 	private int codigoIbge;
+	
+	@Column(name="uf", nullable=false)
 	private String uf;
+	
+	@Column(name="name", nullable=false)
 	private String nome;
+	
+	@Column(name="capital", nullable=true)
 	private boolean capital;
+	
+	@Column(name="lon", nullable=true)
 	private BigDecimal longitude;
+	
+	@Column(name="lat", nullable=true)
 	private BigDecimal latitude;
+	
+	@Column(name="no_accents", nullable=true)
 	private String nomeSemAcento;
+	
+	@Column(name="alternative_name", nullable=true)
 	private String nomeAlternativo;
+	
+	@Column(name="microregion", nullable=true)	
 	private String microRegiao;
+	
+	@Column(name="mesoregion", nullable=true)	
 	private String mesoRegiao;
+	
+	@Column(name="data_criacao", nullable=false)
 	private Date dataCriacao;
+	
+	@Column(name="data_alteracao", nullable=false)
 	private Date dataAlteracao;
+	
 	
 	public Cidade() {}
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	
 	public int getId() {
 		return id;
 	}
@@ -38,7 +64,6 @@ public class Cidade implements Serializable {
 		this.id = id;
 	}
 	
-	@Column(name="ibge_id", nullable=false)
 	public int getcodigoIbge() {
 		return codigoIbge;
 	}
@@ -46,7 +71,6 @@ public class Cidade implements Serializable {
 		this.codigoIbge = codigoIbge;
 	}
 	
-	@Column(name="uf", nullable=false)
 	public String getUf() {
 		return uf;
 	}
@@ -54,7 +78,6 @@ public class Cidade implements Serializable {
 		this.uf = uf;
 	}
 	
-	@Column(name="name", nullable=false)
 	public String getNome() {
 		return nome;
 	}
@@ -62,7 +85,6 @@ public class Cidade implements Serializable {
 		this.nome = nome;
 	}
 	
-	@Column(name="capital", nullable=true)
 	public boolean isCapital() {
 		return capital;
 	}
@@ -70,7 +92,6 @@ public class Cidade implements Serializable {
 		this.capital = capital;
 	}
 	
-	@Column(name="lon", nullable=true)
 	public BigDecimal getLongitude() {
 		return longitude;
 	}
@@ -78,7 +99,6 @@ public class Cidade implements Serializable {
 		this.longitude = longitude;
 	}
 	
-	@Column(name="lat", nullable=true)
 	public BigDecimal getLatitude() {
 		return latitude;
 	}
@@ -86,7 +106,6 @@ public class Cidade implements Serializable {
 		this.latitude = latitude;
 	}
 	
-	@Column(name="no_accents", nullable=true)
 	public String getNomeSemAcento() {
 		return nomeSemAcento;
 	}
@@ -94,7 +113,6 @@ public class Cidade implements Serializable {
 		this.nomeSemAcento = nomeSemAcento;
 	}
 	
-	@Column(name="alternative_name", nullable=true)
 	public String getNomeAlternativo() {
 		return nomeAlternativo;
 	}
@@ -102,16 +120,13 @@ public class Cidade implements Serializable {
 		this.nomeAlternativo = nomeAlternativo;
 	}
 	
-	@Column(name="microregion", nullable=true)
 	public String getMicroregiao() {
 		return microRegiao;
 	}
 	public void setMicroregiao(String microRegiao) {
 		this.microRegiao = microRegiao;
 	}
-		
-	
-	@Column(name="mesoregion", nullable=true)
+			
 	public String getMesoregiao() {
 		return mesoRegiao;
 	}
@@ -119,8 +134,6 @@ public class Cidade implements Serializable {
 		this.mesoRegiao = mesoRegiao;
 	}
 	
-	
-	@Column(name="data_criacao", nullable=false)
 	public Date getDataCriacao() {
 		return dataCriacao;
 	}	
@@ -128,7 +141,6 @@ public class Cidade implements Serializable {
 		this.dataCriacao = dataCriacao;
 	}	
 
-	@Column(name="data_alteracao", nullable=false)
 	public Date getDataAlteracao() {
 		return dataAlteracao;
 	}
@@ -140,6 +152,7 @@ public class Cidade implements Serializable {
 	public void preUpdate() {
 		dataAlteracao = new Date();
 	}
+
 	@PrePersist
 	public void prePersist() {
 		Date hojeHora = new Date();
@@ -153,8 +166,6 @@ public class Cidade implements Serializable {
 				+ capital + ", longitude=" + longitude + ", latitude=" + latitude + ", nomeSemAcento=" + nomeSemAcento
 				+ ", nomeAlternativo=" + nomeAlternativo + ", microregiao=" + microRegiao + ", mesoregiao=" + mesoRegiao
 				+ ", dataCriacao=" + dataCriacao + ", dataAlteracao=" + dataAlteracao + "]";
-	}	
-	
-	
+	}
 
 }

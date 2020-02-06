@@ -1,12 +1,12 @@
 package com.paulorpc.cidades.api.services;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 import com.paulorpc.cidades.api.entities.Cidade;
 
 public interface CidadeService {
-	
 	
 	/***
 	 * Busca uma cidade pelo id
@@ -24,17 +24,32 @@ public interface CidadeService {
 	Optional<Cidade> buscarPorNome(String nome);
 	
 	/***
-	 * Busca todas as cidades
+	 * Busca toas as cidades
 	 * @return Optional<List<Cidade>>
 	 */
 	public List<Cidade> buscarTodas();
 	
 	/***
 	 * Busca todas as cidades que são capitais (ordernadas por nome)
-	 * Exercício 2
+	 * Exercício 2 
 	 * @return Optional<List<Cidade>>
 	 */
 	public List<Cidade> buscarPorCapitaisOrdenadaPorNome();
+	
+	/***
+	 * Busca os estados com a maior e menor quantidade de cidades e o total de cidades.
+	 * Exercício 3
+	 * @return List<HashMap<String, Integer>>
+	 */	
+	public List<HashMap<String, String>> buscarEstadosMaiorMenorQtdeCidades();
+	
+	/***
+	 * Busca a quantidade de cidades por estado
+	 * Exercício 4
+	 * @param orderBy 'coluna'
+	 * @return List<HashMap<String, Integer>>	
+	 */
+	public List<HashMap<String, String>> buscarQtdePorEstado(String sort);
 	
 	/***
 	 * Busca uma cidade pelo código ibge
@@ -69,5 +84,29 @@ public interface CidadeService {
 	 * @return Optional<Cidade>
 	 */
 	Optional<Cidade> deletar(int id);
+
+	/***
+	 * Buscar todas as cidades que contenham um determinado dado na coluna
+	 * Exercício 9
+	 * @param coluna Campo tabela
+	 * @param dado 
+	 * @return List<Cidade>
+	 */
+	List<Cidade> buscarPorFiltroColunaValor(String coluna, String valor);	
 	
+	/***
+	 * Buscar a qtde de registros únicos filtrados por uma determinada coluna
+	 * Exercício 10
+	 * @param coluna Campo tabela	  
+	 * @return List<Cidade>
+	 */
+	List<Object> buscarRegistrosUnicosPorFiltroColuna(String coluna);
+	
+	/***
+	 * Buscar a qtde total de cidades armazenadas
+	 * Exercício 11
+	 * @return HashMap<String, Long> 
+	 */
+	HashMap<String, Long> buscarQtdeRegistros();
+
 }
