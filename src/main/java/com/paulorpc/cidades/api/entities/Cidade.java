@@ -6,10 +6,12 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import com.paulorpc.cidades.api.entities.interfaces.CidadeInt;
+
 
 @Entity
 @Table(name="cidade")
-public class Cidade implements Serializable {
+public class Cidade implements CidadeInt,Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -120,17 +122,17 @@ public class Cidade implements Serializable {
 		this.nomeAlternativo = nomeAlternativo;
 	}
 	
-	public String getMicroregiao() {
+	public String getMicroRegiao() {
 		return microRegiao;
 	}
-	public void setMicroregiao(String microRegiao) {
+	public void setMicroRegiao(String microRegiao) {
 		this.microRegiao = microRegiao;
 	}
 			
-	public String getMesoregiao() {
+	public String getMesoRegiao() {
 		return mesoRegiao;
 	}
-	public void setMesoregiao(String mesoRegiao) {
+	public void setMesoRegiao(String mesoRegiao) {
 		this.mesoRegiao = mesoRegiao;
 	}
 	
@@ -168,4 +170,9 @@ public class Cidade implements Serializable {
 				+ ", dataCriacao=" + dataCriacao + ", dataAlteracao=" + dataAlteracao + "]";
 	}
 
+	@Override
+	public BigDecimal calcularDistancia(Cidade B) {
+		return CidadeInt.calcularDistancia(this, B);
+	}
+	
 }

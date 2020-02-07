@@ -31,21 +31,18 @@ public interface CidadeService {
 	
 	/***
 	 * Busca todas as cidades que são capitais (ordernadas por nome)
-	 * Exercício 2 
 	 * @return Optional<List<Cidade>>
 	 */
 	public List<Cidade> buscarPorCapitaisOrdenadaPorNome();
 	
 	/***
 	 * Busca os estados com a maior e menor quantidade de cidades e o total de cidades.
-	 * Exercício 3
 	 * @return List<HashMap<String, Integer>>
 	 */	
 	public List<HashMap<String, String>> buscarEstadosMaiorMenorQtdeCidades();
 	
 	/***
 	 * Busca a quantidade de cidades por estado
-	 * Exercício 4
 	 * @param orderBy 'coluna'
 	 * @return List<HashMap<String, Integer>>	
 	 */
@@ -53,7 +50,6 @@ public interface CidadeService {
 	
 	/***
 	 * Busca uma cidade pelo código ibge
-	 * Exercício 5
 	 * @param nome
 	 * @return Optional<Cidade>
 	 */
@@ -62,7 +58,6 @@ public interface CidadeService {
 	
 	/***
 	 * Busca todas as cidades que pertencem ao estado solicitado
-	 * Exercício 6
 	 * @param uf
 	 * @return List<Cidade>
 	 */
@@ -71,7 +66,6 @@ public interface CidadeService {
 	
 	/***
 	 * Cadastra uma cidade no banco de dados
-	 * Exercício 7
 	 * @param cidade
 	 * @return Cidade
 	 */
@@ -79,7 +73,6 @@ public interface CidadeService {
 	
 	/***
 	 * Deletar uma cidade pelo id
-	 * Exercício 8
 	 * @param id
 	 * @return Optional<Cidade>
 	 */
@@ -87,7 +80,6 @@ public interface CidadeService {
 
 	/***
 	 * Buscar todas as cidades que contenham um determinado dado na coluna
-	 * Exercício 9
 	 * @param coluna Campo tabela
 	 * @param dado 
 	 * @return List<Cidade>
@@ -96,7 +88,6 @@ public interface CidadeService {
 	
 	/***
 	 * Buscar a qtde de registros únicos filtrados por uma determinada coluna
-	 * Exercício 10
 	 * @param coluna Campo tabela	  
 	 * @return List<Cidade>
 	 */
@@ -104,9 +95,15 @@ public interface CidadeService {
 	
 	/***
 	 * Buscar a qtde total de cidades armazenadas
-	 * Exercício 11
 	 * @return HashMap<String, Long> 
 	 */
 	HashMap<String, Long> buscarQtdeRegistros();
+	
+	
+	/***
+	 * Buscar pelas duas cidades mais distantes entre si.
+	 * @return List<Cidade>
+	 */
+	List<Cidade> buscarCidadesMaisDistantes();
 
 }

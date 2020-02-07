@@ -1,5 +1,6 @@
 package com.paulorpc.cidades.api.services.Impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.paulorpc.cidades.api.entities.Cidade;
+import com.paulorpc.cidades.api.entities.interfaces.CidadeInt;
 import com.paulorpc.cidades.api.repositories.CidadeRepository;
 import com.paulorpc.cidades.api.services.CidadeService;
 
@@ -87,8 +89,8 @@ public class CidadeServiceImpl implements CidadeService {
 	public List<HashMap<String, String>> buscarEstadosMaiorMenorQtdeCidades() {
 		log.info("Buscando estados com maior/menor qtde cidades.");
 		
-		List<HashMap<String,String>> listaRs = this.buscarQtdePorEstado("qtde");
 		List<HashMap<String,String>> lista = new ArrayList<>();
+		List<HashMap<String,String>> listaRs = this.buscarQtdePorEstado("qtde");
 		
 		lista.add(listaRs.get(0));
 		lista.add(listaRs.get(listaRs.size()-1));			
@@ -113,6 +115,7 @@ public class CidadeServiceImpl implements CidadeService {
 		return Optional.ofNullable(cidade);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Cidade> buscarPorFiltroColunaValor(String coluna, String valor) {
 		log.info("Buscando cidades por filtro de coluna/valor.");					
@@ -134,6 +137,30 @@ public class CidadeServiceImpl implements CidadeService {
 		HashMap<String,Long> total = new HashMap<>();
 		total.put("totalCidades", cidadeRepository.count());
 		return total;
+	}
+
+	@Override
+	public List<Cidade> buscarCidadesMaisDistantes() {
+		Cidade A = new Cidade();
+		Cidade B = new Cidade();
+		List<Cidade> resultado = new ArrayList<>();
+		BigDecimal maiorDistancia = new BigDecimal(0.0);
+		List<Cidade> cidades = cidadeRepository.findAll();
+		
+		long total = cidadeRepository.count();
+	    for(int i=0; i<total-1; i++) {
+	    	A = cidades.get(i);
+	    	for(int j=i+1; j<total; j++) { // Não percorre indices já comparados  
+	    		B = cidades.get(j);
+	    		BigDecimal distanciaAB = CidadeInt.calcularDistancia(A, B);
+	    		if ( A.getcodigoIbge() != B.getcodigoIbge() && distanciaAB.compareTo(maiorDistancia) > 0 ) {
+		    			maiorDistancia = distanciaAB;
+		    			resultado.clear();
+		    			resultado.addAll(Arrays.asList(A, B));
+	    		}
+	    	}
+	    }	
+		return resultado;
 	}
 	
 	

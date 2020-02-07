@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.constraints.*;
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 
 public class CidadeDto {
 	
@@ -30,9 +31,8 @@ public class CidadeDto {
 	}
 	
 	
-	@NotEmpty(message="Campo 'codigoIbge' não pode ser vazio.")
 	@NotNull(message="Campo 'codigoIbge' não pode ser nulo.")	
-	//@Range(min=, max=)
+	@Range(min=1000000, max=9999999, message="Range do campo restrido entre {min} e {max}.")
 	public int getCodigoIbge() {
 		return codigoIbge;
 	}
@@ -60,7 +60,6 @@ public class CidadeDto {
 		this.nome = nome;
 	}
 	
-	@NotEmpty(message="Campo 'capital' deve ser 'true' ou 'false'.")
 	@NotNull(message="Campo 'capital' deve ser 'true' ou 'false'.")
 	public boolean isCapital() {
 		return capital;
@@ -85,7 +84,7 @@ public class CidadeDto {
 		this.latitude = latitude;
 	}
 	
-	//@Pattern(regex=, flags=)  	
+	
 	public Optional<@Length(max = 50, message = "Campo 'nomeSemAcento' de deve conter no máximo {max} caracteres") String> getNomeSemAcento() {
 		return nomeSemAcento;
 	}
@@ -102,7 +101,7 @@ public class CidadeDto {
 	}
 	
 	
-	public Optional<@Length(max = 50, message = "Campo 'microRegiao' deve conter no máximo {max} caracteres") String> getMicroregiao() {
+	public Optional<@Length(max = 50, message = "Campo 'microRegiao' deve conter no máximo {max} caracteres") String> getMicroRegiao() {
 		return microRegiao;
 	}	
 	public void setMicroregiao(Optional<String> microRegiao) {
@@ -110,7 +109,7 @@ public class CidadeDto {
 	}	
 
 	
-	public Optional<@Length(max = 50, message = "Campo 'mesoRegiao' deve conter no máximo {max} caracteres") String> getMesoregiao() {
+	public Optional<@Length(max = 50, message = "Campo 'mesoRegiao' deve conter no máximo {max} caracteres") String> getMesoRegiao() {
 		return mesoRegiao;
 	}
 	public void setMesoregiao(Optional<String> mesoRegiao) {
