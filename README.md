@@ -18,4 +18,9 @@ Obs: disponível apenas ao executar a aplicação.
 
 
 #### Nota
-Após realizar as intruções para execução, basta rodar a apicação que a estrututa de banco será implementada automaticamente e o sistemas estará pronto para uso. O projeto ainda pode ser melhorado em diversos aspectos para atender boas práticas de programação.
+Após realizar as intruções para execução, basta rodar a apicação que a estrututa de banco será implementada automaticamente e o sistemas estará pronto para uso. O projeto ainda pode ser melhorado em diversos aspectos para atender boas práticas de programação, como: Melhor definição e especificação de exceções, versionamento, adicionar mais padrões de projetos (Design Patterns), melhorar valiações para retornar códigos de resposta HTTP mais precisos, etc.
+
+
+### Sugestão de Leitura
+# Princípios e boas práticas REST
+- https://www.smarti.blog.br/api-rest-principios-boas-praticas-para-arquiteturas-restful/
