@@ -72,6 +72,13 @@ public interface CidadeService {
 	Cidade persistir(Cidade cidade);
 	
 	/***
+	 * Cadastra uma lista de cidades no banco de dados
+	 * @param List<Cidade>
+	 * @return List<Cidade> 
+	 */
+	List<Cidade> persistirTodas(List<Cidade> cidades);
+	
+	/***
 	 * Deletar uma cidade pelo id
 	 * @param id
 	 * @return Optional<Cidade>

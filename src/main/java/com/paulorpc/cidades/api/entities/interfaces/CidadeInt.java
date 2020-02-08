@@ -7,7 +7,7 @@ import javax.persistence.Transient;
 
 import com.paulorpc.cidades.api.entities.Cidade;
 import com.paulorpc.cidades.api.exceptions.ApiDefaultException;
-import com.paulorpc.cidades.api.utils.EntidadeUtil;
+import com.paulorpc.cidades.api.utils.Util;
 
 public interface CidadeInt {	
 	
@@ -77,7 +77,7 @@ public interface CidadeInt {
 	@Transient
 	public static String mapaColunas(String coluna) {
 
-		if(!EntidadeUtil.isColunaEntidadeValida(Cidade.class, coluna))
+		if(!Util.isColunaEntidadeValida(Cidade.class, coluna))
 			throw new ApiDefaultException("Não foi possível identificar a coluna informada.");
 		
 		HashMap<String, String> mapa = new HashMap<>();

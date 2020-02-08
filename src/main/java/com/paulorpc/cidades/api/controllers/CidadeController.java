@@ -33,7 +33,8 @@ import com.paulorpc.cidades.api.services.Impl.CidadeServiceImpl;
 
 @RestController
 @RequestMapping("/api/cidades")
-@CrossOrigin("*") // TODO ALTERAR CROSSORIGIN 
+@CrossOrigin("*") // TODO ALTERAR CROSSORIGIN
+@SuppressWarnings("static-access")
 public class CidadeController {
 	
 	private static final Logger log = LoggerFactory.getLogger(CidadeServiceImpl.class);
@@ -208,6 +209,7 @@ public class CidadeController {
 	 * Exercício 9
 	 * @param RequestBody filtroDto
 	 */
+	
 	@GetMapping(value="/filtro")
 	public ResponseEntity<Response<List<CidadeDto>>> buscarPorFiltroColuna(@Valid @RequestBody FiltroDto filtroDto, BindingResult result) {
 		log.info("Buscar cidades utilizando o filtro de coluna com valor. Filtro {}", filtroDto.toString());
@@ -289,12 +291,14 @@ public class CidadeController {
 	public ResponseEntity<Response<List<Cidade>>> buscarCidadesMaisDistantes() {
 		log.info("Buscar cidades mais dintantes entre si.");
 		Response<List<Cidade>> response = new Response<>();
+				
 		List<Cidade> cidades = cidadeService.buscarCidadesMaisDistantes();
 		
 		if(cidades.isEmpty()) {
-			String msgErro = "Falha ao identificar as cidades com maior distancia entre si.";
-			log.error(msgErro);
-			throw new ApiDefaultException(msgErro);
+			log.error("Não há cidades cadastradas no banco de dados.");
+			response.getErros().add("Nenhum resultado foi encontrado para a pesquisa solicitada. ");
+			return ResponseEntity.badRequest().body(response);
+			
 		}
 		response.setDados(cidades);
 		return ResponseEntity.ok(response);
@@ -309,7 +313,8 @@ public class CidadeController {
 	 * @param result
 	 * @return Cidade
 	 */
-	private Cidade converterCidadeDtoParaCidade(CidadeDto cidadeDto, BindingResult result) {
+	protected static Cidade converterCidadeDtoParaCidade(CidadeDto cidadeDto, BindingResult result) {
+		//System.out.println(cidadeDto.toString());
 		Cidade cidade = new Cidade();
 		cidade.setNome(cidadeDto.getNome());
 		cidade.setcodigoIbge(cidadeDto.getCodigoIbge());
@@ -331,7 +336,8 @@ public class CidadeController {
 	 * @param cidade
 	 * @return CidadeDto
 	 */
-	private CidadeDto converterCidadeParaCidadeDto(Cidade cidade) {
+	protected static CidadeDto converterCidadeParaCidadeDto(Cidade cidade) {
+		//System.out.println(cidade.toString());
 		CidadeDto cidadeDto = new CidadeDto();
 		cidadeDto.setNome(cidade.getNome());
 		cidadeDto.setCapital(cidade.isCapital());

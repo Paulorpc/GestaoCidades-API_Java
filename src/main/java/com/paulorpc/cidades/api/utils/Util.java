@@ -22,7 +22,7 @@ import com.paulorpc.cidades.api.entities.Cidade;
 import com.paulorpc.cidades.api.exceptions.ApiDefaultException;
 import com.paulorpc.cidades.api.services.Impl.CidadeServiceImpl;
 
-public class EntidadeUtil {
+public class Util {
 	
 	private static final Logger log = LoggerFactory.getLogger(CidadeServiceImpl.class);
 		
@@ -77,7 +77,7 @@ public class EntidadeUtil {
 	 * @throws Exception ApiDefaultException
 	 */
 	@SuppressWarnings("resource")
-	public static List<Cidade> gerarCidadesDoArquivoCsv(String caminhoArquivo, String separador) throws Exception {
+	public static List<Cidade> gerarCidadesDoArquivoCsv(String caminhoArquivo, String separador) {
         
 		File input = new File(caminhoArquivo);
         Pattern pattern = Pattern.compile(separador);
@@ -101,8 +101,9 @@ public class EntidadeUtil {
 													   }).collect( Collectors.toList() );
         }
         catch(Exception e){
-        	String msgErro="Erro ao gerar lista de cidade a partir do arquivo csv.";
+        	String msgErro="Erro ao gerar lista de cidade a partir do arquivo csv. " +e.getMessage();
         	log.error(msgErro, e);
+        	e.printStackTrace();
         	throw new ApiDefaultException(msgErro, e);
         }
         

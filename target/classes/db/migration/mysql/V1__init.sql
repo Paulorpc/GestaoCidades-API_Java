@@ -10,6 +10,6 @@ CREATE TABLE cidade (
 	alternative_name VARCHAR(50),
 	microregion VARCHAR(50),
 	mesoregion VARCHAR(50),
-	creation_date DATETIME NOT NULL,
-	updated_date DATETIME NOT NULL
+	data_criacao DATETIME,
+	data_alteracao DATETIME
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

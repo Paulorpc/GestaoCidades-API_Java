@@ -67,6 +67,12 @@ public class CidadeServiceImpl implements CidadeService {
 		log.info("Persistindo cidade: {}", cidade);
 		return cidadeRepository.save(cidade);
 	}
+	
+	@Override
+	public List<Cidade> persistirTodas(List<Cidade> cidades) {
+		log.info("Persistindo cidade: {}", cidades.toString());
+		return cidadeRepository.saveAll(cidades);
+	}
 
 	@Override
 	public List<HashMap<String, String>> buscarQtdePorEstado(String sort) {
@@ -139,21 +145,33 @@ public class CidadeServiceImpl implements CidadeService {
 		return total;
 	}
 
+	/***
+	 * Método para identificar quais as duas cidades mais distantes entre si.
+	 * 
+	 * Algoritmo com complexidade O(n2) melhorado, pois não percorre indices repetidos.
+	 * Provável que seja possível melhorar para O(n) ou O(lg n) com algoritmos
+	 * otimizados, como de árvore, por exemplo.  
+	 */
 	@Override
 	public List<Cidade> buscarCidadesMaisDistantes() {
 		Cidade A = new Cidade();
 		Cidade B = new Cidade();
 		List<Cidade> resultado = new ArrayList<>();
 		BigDecimal maiorDistancia = new BigDecimal(0.0);
+
 		List<Cidade> cidades = cidadeRepository.findAll();
+	
+		if(cidades.isEmpty())
+			return resultado;
 		
-		long total = cidadeRepository.count();
-	    for(int i=0; i<total-1; i++) {
+		long total = cidades.size();
+		
+	    for(int i=0; i<total-1; i++) {	    	
 	    	A = cidades.get(i);
-	    	for(int j=i+1; j<total; j++) { // Não percorre indices já comparados  
+	    	for(int j=i+1; j<total; j++) { 	    		
 	    		B = cidades.get(j);
 	    		BigDecimal distanciaAB = CidadeInt.calcularDistancia(A, B);
-	    		if ( A.getcodigoIbge() != B.getcodigoIbge() && distanciaAB.compareTo(maiorDistancia) > 0 ) {
+	    		if (distanciaAB.compareTo(maiorDistancia) > 0) {
 		    			maiorDistancia = distanciaAB;
 		    			resultado.clear();
 		    			resultado.addAll(Arrays.asList(A, B));
@@ -162,6 +180,5 @@ public class CidadeServiceImpl implements CidadeService {
 	    }	
 		return resultado;
 	}
-	
-	
+
 }
