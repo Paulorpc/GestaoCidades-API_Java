@@ -1,5 +1,6 @@
 package com.paulorpc.cidades.api.controllers;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -25,6 +26,7 @@ import com.paulorpc.cidades.api.reponse.Response;
 import com.paulorpc.cidades.api.services.ArquivoService;
 import com.paulorpc.cidades.api.services.CidadeService;
 import com.paulorpc.cidades.api.utils.Util;
+
 
 @RestController
 @RequestMapping("/api/arquivos")
@@ -57,7 +59,8 @@ public class ArquivoController {
 		String uri = new String();
 		
 		try {
-			nome = arquivoService.armazenar(arquivo);
+			Path caminhoArquivo = Util.getCaminhoArquivos().getRepositorioCidades();
+			nome = arquivoService.armazenar(arquivo, caminhoArquivo);
 			log.info("Arquivo enviado com sucesso: {}", arquivo.getName());
 			
 			uri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -94,7 +97,8 @@ public class ArquivoController {
 		String uri = new String();
 		
 		try {
-			nome = arquivoService.armazenar(arquivo);
+			Path caminhoArquivo = Util.getCaminhoArquivos().getRepositorioCidades();
+			nome = arquivoService.armazenar(arquivo, caminhoArquivo);
 			log.info("Arquivo enviado com sucesso: {}", arquivo.getName());
 			
 			 uri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -103,8 +107,7 @@ public class ArquivoController {
 								              .toUriString();
 			 
 			log.info("Cadastrar cidades do arquivo enviado.");
-			//TODO adicionar caminho num arquivo de configuração ou variável de ambiente.
-			cidadesArquivo = Util.gerarCidadesDoArquivoCsv("/home/pcezar/eclipse-workspace/GestaoCidades/arquivosEnviados/"+nome, ",");
+			cidadesArquivo = Util.gerarCidadesDoArquivoCsv(caminhoArquivo, nome,",");
 
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);

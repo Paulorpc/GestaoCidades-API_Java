@@ -37,6 +37,8 @@ import com.paulorpc.cidades.api.services.Impl.CidadeServiceImpl;
 @SuppressWarnings("static-access")
 public class CidadeController {
 	
+	//TODO CRIAR CLASSES PARA ALGUNS CONTROLLERS RETORNANDO OBJETOS
+	
 	private static final Logger log = LoggerFactory.getLogger(CidadeServiceImpl.class);
 	
 	@Autowired

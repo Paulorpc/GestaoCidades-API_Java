@@ -1,5 +1,7 @@
 package com.paulorpc.cidades.api.services;
 
+import java.nio.file.Path;
+
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,7 +14,7 @@ public interface ArquivoService {
 	 * @return String nomeArquivo
 	 * @throws Exception 
 	 */
-	public String armazenar(MultipartFile arquivo) throws Exception;	
+	public String armazenar(MultipartFile arquivo, Path caminhoArquivo) throws Exception;	
 		
 	
 	/***

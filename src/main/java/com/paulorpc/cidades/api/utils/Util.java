@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.StringWriter;
 import java.math.BigDecimal;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -17,7 +18,7 @@ import org.mariadb.jdbc.internal.logging.LoggerFactory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
+import com.paulorpc.cidades.api.config.ArquivoConfig;
 import com.paulorpc.cidades.api.entities.Cidade;
 import com.paulorpc.cidades.api.exceptions.ApiDefaultException;
 import com.paulorpc.cidades.api.services.Impl.CidadeServiceImpl;
@@ -25,6 +26,10 @@ import com.paulorpc.cidades.api.services.Impl.CidadeServiceImpl;
 public class Util {
 	
 	private static final Logger log = LoggerFactory.getLogger(CidadeServiceImpl.class);
+	
+	public static ArquivoConfig getCaminhoArquivos() {
+		return new ArquivoConfig();		
+	}
 		
 	/***
 	 * Verifica se o campo com anotação @Column foi declarado pela classe 
@@ -77,14 +82,13 @@ public class Util {
 	 * @throws Exception ApiDefaultException
 	 */
 	@SuppressWarnings("resource")
-	public static List<Cidade> gerarCidadesDoArquivoCsv(String caminhoArquivo, String separador) {
-        
-		File input = new File(caminhoArquivo);
+	public static List<Cidade> gerarCidadesDoArquivoCsv(Path caminhoArquivo, String nome, String separador) {
+        String caminho = caminhoArquivo.resolve(nome).toAbsolutePath().normalize().toString();        
         Pattern pattern = Pattern.compile(separador);
         List<Cidade> cidades = new ArrayList<Cidade>();
 
         try {        	
-        	BufferedReader in = new BufferedReader(new FileReader(input));
+        	BufferedReader in = new BufferedReader(new FileReader(new File(caminho)));
         	cidades = in.lines().skip(1).map( line -> { String[] s = pattern.split(line);
 																 Cidade c = new Cidade();        															 
 																 c.setcodigoIbge( Integer.parseInt( s[0]) );
