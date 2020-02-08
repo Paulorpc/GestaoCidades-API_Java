@@ -4,6 +4,5 @@ Gestão de Cidades REST API
 
 Documentação da API REST com detalhes de acesso aos endpoints.
 
-Documentação:
 http://localhost:8080/swagger-ui.html#/arquivo-controller
 
