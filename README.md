@@ -17,6 +17,16 @@ Obs: disponível apenas ao executar a aplicação.
 - Alterar a configuração de usuário e senha no arquivo 'application.properties'
 
 
+#### MARIADB COM DOCKER
+Uma possibilidade para montadem do ambiente é utilizar o banco de dados através de containers. O Docker possibilita usarmos esse ambiente com muita facilidade. Será necessário apenas baixar a imagem e criar o database. No demais, a aplicação se vira com o migration através do flyway. Para montar o ambiente de BD, realize os seguintes comandos:
+```shell
+$ docker pull mariadb
+$ docker run --name mariadb -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 -d mariadb:latest
+$ docker exec -it mariadb base
+$ mysql -u root -p
+$ create database gestaocidades 
+```
+
 #### Nota
 Após realizar as instruções para execução, basta rodar a aplicação que a estrutura de banco será implementada automaticamente e o sistema estará pronto para uso. O projeto ainda pode ser melhorado em diversos aspectos para atender boas práticas de programação, como: Melhor definição e especificação de exceções, versionamento, adicionar mais padrões de projetos (Design Patterns), melhorar validações para retornar códigos de resposta HTTP mais precisos, etc.
 
