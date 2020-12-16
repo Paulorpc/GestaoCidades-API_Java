@@ -21,7 +21,7 @@ Obs: disponível apenas ao executar a aplicação.
 Uma possibilidade para montadem do ambiente é utilizar o banco de dados através de containers. O Docker possibilita usarmos esse ambiente com muita facilidade. Será necessário apenas baixar a imagem e criar o database. No demais, a aplicação se vira com o migration através do flyway. Para montar o ambiente de BD, realize os seguintes comandos:
 ```shell
 $ docker pull mariadb
-$ docker run --name mariadb -e MYSQL_ROOT_PASSWORD=root -eMYSQL_DATABASE=gestaocidades -p 3306:3306 -d mariadb:latest
+$ docker run --name mariadb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=gestaocidades -p 3306:3306 -d mariadb:latest
 ```
 
 Para certificar que o container e está em execução e que a base foi gerada corretamente:
